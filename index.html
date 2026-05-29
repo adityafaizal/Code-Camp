@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gym Member Transaction Tracker</title>
+
+  <!-- Chart.js CDN for the pie chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Single external stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER: Total Balance ===== -->
+  <header class="header">
+    <h1 class="app-title">🏋️ Gym Transaction Tracker</h1>
+    <div class="balance-box">
+      <span class="balance-label">Total Balance</span>
+      <span class="balance-amount" id="totalBalance">$0.00</span>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- LEFT COLUMN: Form + Transaction List -->
+    <section class="left-column">
+
+      <!-- Add Transaction Form -->
+      <div class="card">
+        <h2 class="card-title">Add Transaction</h2>
+
+        <!-- Validation error message (hidden by default) -->
+        <div class="error-message" id="errorMessage" role="alert" aria-live="polite"></div>
+
+        <form id="transactionForm" novalidate>
+          <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input
+              type="text"
+              id="itemName"
+              placeholder="e.g. Monthly Membership"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount ($)</label>
+            <input
+              type="number"
+              id="amount"
+              placeholder="e.g. 50.00"
+              min="0.01"
+              step="0.01"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="">-- Select a category --</option>
+              <option value="Membership">Membership</option>
+              <option value="Equipment">Equipment</option>
+              <option value="Supplements">Supplements</option>
+              <option value="Classes">Classes</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-add">Add Transaction</button>
+        </form>
+      </div>
+
+      <!-- Transaction List -->
+      <div class="card">
+        <h2 class="card-title">Transaction List</h2>
+
+        <!-- Scrollable list container -->
+        <ul class="transaction-list" id="transactionList">
+          <!-- Empty state shown when no transactions exist -->
+          <li class="empty-state" id="emptyState">No transactions yet. Add one above!</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- RIGHT COLUMN: Pie Chart -->
+    <section class="right-column">
+      <div class="card chart-card">
+        <h2 class="card-title">Spending by Category</h2>
+
+        <!-- Placeholder shown when list is empty -->
+        <div class="chart-placeholder" id="chartPlaceholder">
+          <p>Add transactions to see your spending chart.</p>
+        </div>
+
+        <!-- Canvas for Chart.js pie chart -->
+        <canvas id="spendingChart" aria-label="Spending distribution pie chart" role="img"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Single external JavaScript file -->
+  <script src="app.js"></script>
+</body>
+</html>
